@@ -6,8 +6,8 @@ import { setupGlobalErrorHandlers } from "../pkg/errors/error-handler"
 import appInstance from "../pkg/appInstance/appInstance"
 import PingModule from "../modules/ping/ping.module"
 import errorMiddleware from "../pkg/errors/error.middleware"
-import { WorkFact } from "../model/workFact.model"
 import { initializeDatabase } from "../pkg/db/db.init"
+import WorkFactModule from "../modules/workFact/workFact.module"
 
 (async () => {
   const server = fastify({ logger: true })
@@ -20,7 +20,7 @@ import { initializeDatabase } from "../pkg/db/db.init"
   })
   appInstance.setApp(server)
   new PingModule(server)
-  new WorkFact(server)
+  new WorkFactModule(server)
   server.setErrorHandler(errorMiddleware)
   
   try {
