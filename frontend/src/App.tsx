@@ -1,4 +1,5 @@
-import { useEffect } from "react"
+// App.tsx
+import { use, useEffect } from "react"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from "./components/providers/ThemeProvider"
 import { DashboardLayout } from "./components/Layout/DashboardLayout"
@@ -6,6 +7,7 @@ import { useInitializeApp } from "./hooks/useInitializeApp"
 import { Toaster } from "react-hot-toast"
 import LoadingSpinner from "./components/UI/LoadingSpinner"
 import NotFound from "./pages/NotFound"
+import { WorkJournalPage } from "./pages/Main"
 
 function MainApp() {
   const {
@@ -51,7 +53,7 @@ function MainApp() {
       <div className="min-h-screen bg-slate-50">
         <Routes>
           <Route element={<DashboardLayout />}>
-            <Route path="/" element={<></>} />
+            <Route path="/" element={<WorkJournalPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

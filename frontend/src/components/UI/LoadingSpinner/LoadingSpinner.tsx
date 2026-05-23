@@ -38,7 +38,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         ))}
       </div>
       {text && (
-        <p className={`${sizeMap[size].text} text-slate-600 font-medium`}>
+        <p className={`${sizeMap[size].text} text-slate-600 font-medium w-screen text-center`}>
           {text}
         </p>
       )}

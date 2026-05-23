@@ -1,17 +1,7 @@
 import axios, { type AxiosInstance } from 'axios'
 import appconfig from '../../appconfig'
 import { handlerError } from './api.util'
-import type { IWorkFact } from '../../../../backend/src/models/workFact.model'
-
-interface WorkType {
-  id: string
-  name: string
-  unit: string
-}
-
-interface WorkFactResponse extends IWorkFact {
-  workType?: WorkType
-}
+import type { WorkFact, WorkFactFormData, WorkType } from "../types/workFact"
 
 class ApiWorkFactService {
   private axiosInstance: AxiosInstance
@@ -24,38 +14,32 @@ class ApiWorkFactService {
     })
   }
 
-  public async findAll(): Promise<WorkFactResponse[]> {
-    return await this.axiosInstance.get<WorkFactResponse[]>(
+  public async findAll(): Promise<WorkFact[]> {
+    return await this.axiosInstance.get(
       `/api/work-facts`,
     )
       .then(r => r.data)
       .catch(e => handlerError(e))
   }
 
-  public async findById(id: string): Promise<WorkFactResponse | null> {
-    return await this.axiosInstance.get<WorkFactResponse>(
+  public async findById(id: string): Promise<WorkFact | null> {
+    return await this.axiosInstance.get<WorkFact>(
       `/api/work-facts/${id}`,
     )
       .then(r => r.data)
       .catch(e => handlerError(e))
   }
 
-  public async findByDateRange(startDate: Date, endDate: Date): Promise<WorkFactResponse[]> {
-    return await this.axiosInstance.get<WorkFactResponse[]>(
+  public async findByDateRange(startDate: Date, endDate: Date): Promise<WorkFact[]> {
+    return await this.axiosInstance.get<WorkFact[]>(
       `/api/work-facts/range/${startDate.toISOString()}/${endDate.toISOString()}`,
     )
       .then(r => r.data)
       .catch(e => handlerError(e))
   }
 
-  public async create(data: {
-    workDate: Date
-    workTypeId: string
-    volume: number
-    unit: string
-    workerName: string
-  }): Promise<WorkFactResponse> {
-    return await this.axiosInstance.post<WorkFactResponse>(
+  public async create(data: WorkFactFormData): Promise<WorkFact> {
+    return await this.axiosInstance.post<WorkFact>(
       '/api/work-facts',
       data,
     )
@@ -69,8 +53,8 @@ class ApiWorkFactService {
     volume?: number
     unit?: string
     workerName?: string
-  }): Promise<WorkFactResponse | null> {
-    return await this.axiosInstance.put<WorkFactResponse>(
+  }): Promise<WorkFact | null> {
+    return await this.axiosInstance.put<WorkFact>(
       `/api/work-facts/${id}`,
       data,
     )
@@ -78,8 +62,8 @@ class ApiWorkFactService {
       .catch(e => handlerError(e))
   }
 
-  public async delete(id: string): Promise<WorkFactResponse | null> {
-    return await this.axiosInstance.delete<WorkFactResponse>(
+  public async delete(id: string): Promise<WorkFact | null> {
+    return await this.axiosInstance.delete<WorkFact>(
       `/api/work-facts/${id}`,
     )
       .then(r => r.data)

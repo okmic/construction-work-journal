@@ -1,6 +1,6 @@
-import { Document, Schema, model, Types, Model } from 'mongoose'
+import { Document, Schema, model, Model } from 'mongoose'
 
-export interface IWorkFact  {
+export interface IWorkFact {
   _id: string
   createdAt: Date
   workDate: Date
@@ -9,6 +9,11 @@ export interface IWorkFact  {
   unit: string
   workerName: string
   updatedAt: Date
+  workType?: {
+    id: string
+    name: string
+    unit: string
+  }
 }
 
 export type WorkFactDocument = Document & IWorkFact
