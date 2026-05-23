@@ -1,7 +1,7 @@
 import { Document, Schema, model, Types, Model } from 'mongoose'
 
-export interface IWorkFact extends Document {
-  _id: Types.ObjectId
+export interface IWorkFact  {
+  _id: string
   createdAt: Date
   workDate: Date
   workTypeId: string
@@ -11,7 +11,9 @@ export interface IWorkFact extends Document {
   updatedAt: Date
 }
 
-const workFactSchema = new Schema<IWorkFact>({
+export type WorkFactDocument = Document & IWorkFact
+
+const workFactSchema = new Schema<WorkFactDocument>({
   workDate: { type: Date, required: true },
   workTypeId: { type: String, required: true },
   volume: { type: Number, required: true, min: 0 },
@@ -25,6 +27,6 @@ workFactSchema.pre('findOneAndUpdate', function() {
   this.set({ updatedAt: new Date() })
 })
 
-interface IWorkFactModel extends Model<IWorkFact> {}
+interface IWorkFactModel extends Model<WorkFactDocument> {}
 
-export const WorkFact = model<IWorkFact, IWorkFactModel>('WorkFact', workFactSchema)
+export const WorkFact = model<WorkFactDocument, IWorkFactModel>('WorkFact', workFactSchema)
