@@ -1,5 +1,5 @@
-import React from 'react'
-import { FaCalendarAlt, FaTimes } from 'react-icons/fa'
+import React, { useRef } from 'react'
+import { FaCalendarAlt, FaTimes, FaFilter } from 'react-icons/fa'
 
 interface FilterBarProps {
   filterDate: string
@@ -7,32 +7,54 @@ interface FilterBarProps {
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({ filterDate, onFilterChange }) => {
+  const dateInputRef = useRef<HTMLInputElement>(null)
+
+  const formatDisplayDate = (dateString: string) => {
+    if (!dateString) return ''
+    const [year, month, day] = dateString.split('-')
+    return `${day}.${month}.${year}`
+  }
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onFilterChange(e.target.value)
+  }
+
+  const handleClearFilter = () => {
+    onFilterChange('')
+  }
+
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-4 mb-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <FaCalendarAlt className="text-slate-400 text-sm" />
-          <label className="text-sm font-medium text-slate-700">
-            Фильтр по дате
-          </label>
-          <input
-            type="date"
-            value={filterDate}
-            onChange={(e) => onFilterChange(e.target.value)}
-            className="px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div>
-        
-        {filterDate && (
+    <div className="flex flex-wrap items-center gap-3">
+      <div className="relative">
+        <input
+          ref={dateInputRef}
+          type="date"
+          value={filterDate}
+          onChange={handleDateChange}
+          className="px-3 py-1.5 pr-7 bg-white border border-slate-200 rounded-lg text-sm text-slate-700 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 cursor-pointer"
+        />
+        <FaCalendarAlt className="absolute right-2 top-1/2 -translate-y-1/2 text-orange-400 text-xs pointer-events-none" />
+      </div>
+      
+      {filterDate ? (
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-slate-500">
+            Фильтр: <span className="font-mono text-slate-700">{formatDisplayDate(filterDate)}</span>
+          </span>
           <button
-            onClick={() => onFilterChange('')}
-            className="flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 transition-colors"
+            onClick={handleClearFilter}
+            className="flex items-center gap-1.5 px-2.5 py-1 bg-orange-500 text-white rounded-md text-xs font-medium hover:bg-orange-600 transition-all shadow-sm hover:shadow"
           >
             <FaTimes className="text-xs" />
-            Сбросить фильтр
+            Сбросить
           </button>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-1.5">
+          <FaFilter className="text-slate-300 text-xs" />
+          <span className="text-sm text-slate-400">Все записи</span>
+        </div>
+      )}
     </div>
   )
 }
