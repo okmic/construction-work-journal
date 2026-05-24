@@ -140,20 +140,20 @@ export const WorkFactTable: React.FC<WorkFactTableProps> = ({ records, workTypes
                   <div className="flex items-center justify-center gap-2">
                     <button
                       onClick={() => onEdit(record)}
-                      className="group relative w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md cursor-pointer"
+                      className="group relative w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md cursor-pointer"
                       title="Редактировать"
                     >
-                      <FaEdit className="text-sm group-hover:scale-110 transition-transform" />
+                      <FaEdit className="text-sm transition-transform" />
                       <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-800 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
                         Редактировать
                       </span>
                     </button>
                     <button
                       onClick={() => handleDelete(record._id)}
-                      className="group relative w-8 h-8 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white hover:scale-105 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md cursor-pointer"
+                      className="group relative w-8 h-8 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition-all flex items-center justify-center shadow-sm hover:shadow-md cursor-pointer"
                       title="Удалить"
                     >
-                      <FaTrash className="text-sm group-hover:scale-110 transition-transform" />
+                      <FaTrash className="text-sm transition-transform" />
                       <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-800 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
                         Удалить
                       </span>

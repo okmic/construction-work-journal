@@ -11,5 +11,50 @@ services:
     ports:
       - "27017:27017"
     restart: unless-stopped
+    networks:
+      - cwj-network
+
+  backend:
+    build: ./backend
+    container_name: cwj_backend
+    environment:
+      MODE: docker
+      GATWAY_URI: http://localhost:9999
+      GATWAY_PORT: 9999
+      MONGODB_URI: "mongodb://admin:password@mongodb:27017/cwj?authSource=admin&serverSelectionTimeoutMS=2000"
+      MONGODB_NAME: cwj
+      NODE_ENV: development
+      PORT: 9999
+    ports:
+      - "9999:9999"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - cwj-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: cwj_frontend
+    environment:
+      NODE_ENV: development
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - cwj-network
+    restart: unless-stopped
+
 volumes:
   mongodb_data:
+
+networks:
+  cwj-network:
+    driver: bridge

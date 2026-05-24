@@ -18,32 +18,32 @@ class ApiWorkFactService {
     return await this.axiosInstance.get(
       `/api/work-facts`,
     )
-      .then(r => r.data)
+      .then(r => r.data.records)
       .catch(e => handlerError(e))
   }
 
   public async findById(id: string): Promise<WorkFact | null> {
-    return await this.axiosInstance.get<WorkFact>(
+    return await this.axiosInstance.get(
       `/api/work-facts/${id}`,
     )
-      .then(r => r.data)
+      .then(r => r.data.record)
       .catch(e => handlerError(e))
   }
 
   public async findByDateRange(startDate: Date, endDate: Date): Promise<WorkFact[]> {
-    return await this.axiosInstance.get<WorkFact[]>(
+    return await this.axiosInstance.get(
       `/api/work-facts/range/${startDate.toISOString()}/${endDate.toISOString()}`,
     )
-      .then(r => r.data)
+      .then(r => r.data.records)
       .catch(e => handlerError(e))
   }
 
   public async create(data: WorkFactFormData): Promise<WorkFact> {
-    return await this.axiosInstance.post<WorkFact>(
+    return await this.axiosInstance.post(
       '/api/work-facts',
       data,
     )
-      .then(r => r.data)
+      .then(r => r.data.record)
       .catch(e => handlerError(e))
   }
 
@@ -54,27 +54,27 @@ class ApiWorkFactService {
     unit?: string
     workerName?: string
   }): Promise<WorkFact | null> {
-    return await this.axiosInstance.put<WorkFact>(
+    return await this.axiosInstance.put(
       `/api/work-facts/${id}`,
       data,
     )
-      .then(r => r.data)
+      .then(r => r.data.record)
       .catch(e => handlerError(e))
   }
 
   public async delete(id: string): Promise<WorkFact | null> {
-    return await this.axiosInstance.delete<WorkFact>(
+    return await this.axiosInstance.delete(
       `/api/work-facts/${id}`,
     )
-      .then(r => r.data)
+      .then(r => r.data.record)
       .catch(e => handlerError(e))
   }
 
   public async getWorkTypes(): Promise<WorkType[]> {
-    return await this.axiosInstance.get<WorkType[]>(
+    return await this.axiosInstance.get(
       `/api/work-types`,
     )
-      .then(r => r.data)
+      .then(r => r.data.types)
       .catch(e => handlerError(e))
   }
 }

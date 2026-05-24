@@ -62,11 +62,22 @@ export const useWorkFacts = () => {
     dispatch(setFilterDate(date))
   }
 
+  const normalizeDate = (date: Date | string): string => {
+    if (date instanceof Date) {
+      return date.toISOString().split('T')[0]
+    }
+    if (typeof date === 'string') {
+      const cleanDate = date.split('T')[0]
+      if (cleanDate.includes('-')) {
+        return cleanDate
+      }
+    }
+    return ''
+  }
+
   const filteredRecords = filterDate
     ? records.filter(record => {
-        const recordDate = record.workDate instanceof Date
-          ? record.workDate.toISOString().split('T')[0]
-          : record.workDate
+        const recordDate = normalizeDate(record.workDate)
         return recordDate === filterDate
       })
     : records

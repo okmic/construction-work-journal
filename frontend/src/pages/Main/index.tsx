@@ -75,7 +75,7 @@ export const WorkJournalPage: React.FC = () => {
           {!showForm && (
             <button
               onClick={handleCreate}
-              className="cursor-pointer flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg text-sm font-medium hover:from-orange-600 hover:to-orange-700 transition-all shadow-sm hover:shadow-md"
+              className="cursor-pointer flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg text-sm font-medium hover:from-orange-600 shadow-sm"
             >
               <FaPlusCircle className="text-xs" />
               Новая запись
@@ -90,7 +90,7 @@ export const WorkJournalPage: React.FC = () => {
         {showForm ? (
           <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
             <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-white border-b border-slate-200 flex items-center justify-between">
-              <div className="flex items-center gap-2">
+              <div className="cursor-pointer flex items-center gap-2">
                 <div className={`w-6 h-6 rounded flex items-center justify-center ${editingRecord ? 'bg-blue-100' : 'bg-orange-100'}`}>
                   {editingRecord ? (
                     <FaPen className="text-blue-600 text-xs" />
@@ -106,7 +106,7 @@ export const WorkJournalPage: React.FC = () => {
               </div>
               <button
                 onClick={handleCancel}
-                className="group cursor-pointer w-7 h-7 rounded-lg bg-orange-100 hover:bg-orange-500 transition-all duration-200 flex items-center justify-center shadow-sm hover:shadow-md"
+                className="group cursor-pointer w-7 h-7 rounded-lg bg-orange-100 hover:bg-orange-500 transition-all duration-200 flex items-center justify-center shadow-sm"
               >
                 <FaTimes className="text-orange-500 group-hover:text-white text-sm transition-colors duration-200" />
               </button>

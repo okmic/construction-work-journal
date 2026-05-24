@@ -186,7 +186,7 @@ export const WorkFactForm: React.FC<WorkFactFormProps> = ({
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-left flex items-center justify-between hover:border-slate-300 transition-colors focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
+              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-left flex items-center justify-between transition-colors focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
             >
               <span className={selectedWorkType ? 'text-slate-700' : 'text-slate-400'}>
                 {selectedWorkType?.name || 'Выберите вид работ'}
@@ -268,7 +268,7 @@ export const WorkFactForm: React.FC<WorkFactFormProps> = ({
               <button
                 type="button"
                 onClick={() => setIsUnitOpen(!isUnitOpen)}
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-left flex items-center justify-between hover:border-slate-300 transition-colors focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-left flex items-center justify-between transition-colors focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400"
               >
                 <span className={formData.unit ? 'text-slate-700 font-mono' : 'text-slate-400'}>
                   {formData.unit || 'Выберите единицу измерения'}
@@ -331,7 +331,7 @@ export const WorkFactForm: React.FC<WorkFactFormProps> = ({
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
-                <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full" />
                 Сохранение...
               </span>
             ) : (editingRecord ? 'Сохранить' : 'Добавить')}
@@ -340,7 +340,7 @@ export const WorkFactForm: React.FC<WorkFactFormProps> = ({
           <button
             type="button"
             onClick={onCancel}
-            className="cursor-pointer px-4 py-2 border border-slate-300 text-slate-600 rounded-lg font-medium text-sm hover:bg-slate-50 transition-all"
+            className="cursor-pointer px-4 py-2 border border-slate-300 text-slate-600 rounded-lg font-medium text-sm transition-all"
           >
             Отмена
           </button>
