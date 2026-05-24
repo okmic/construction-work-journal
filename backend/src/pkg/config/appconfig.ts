@@ -1,5 +1,8 @@
 import dotenv from "dotenv"
-dotenv.config()
+
+if(process.env.MODE !== "docker") {
+    dotenv.config()
+}
 
 const value = (value: any): string  => {
     if(!value) throw new Error('Invalid env property: ' + value)
